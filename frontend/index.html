@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticketing Service</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Welcome to the Ticketing Service</h1>
+
+    <div style="position: absolute; top: 10px; right: 20px; display: flex; align-items: center;">
+        <button id="account-button" style="margin-right: 10px;">My Account</button>
+        <div id="user-display" style="font-weight: bold;"></div>
+    </div>
+    
+
+    <div id="user-display" style="position: absolute; top: 10px; right: 20px; font-weight: bold;"></div>
+
+    <div id="auth-section">
+         <!-- User Registration -->
+        <h2>Register</h2>
+        <input type="text" id="register-name" placeholder="Full Name">
+        <input type="email" id="register-email" placeholder="Email">
+        <input type="password" id="register-password" placeholder="Password">
+        <button id="register-button">Register</button>
+
+        <h2>Login</h2>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Password">
+        <button id="login-button">Login</button>
+    </div>
+
+    <div id="events-section">
+        <h2>Available Events</h2>
+
+        <!--  Search Bar & Button -->
+        <input type="text" id="search-events" placeholder="Search events...">
+        <button id="search-button">Search</button>
+
+        <!--  Events List -->
+        <div id="events-list"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

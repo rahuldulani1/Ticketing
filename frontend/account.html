@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Home Button (Top Left) -->
+    <button id="home-button" style="position: absolute; top: 10px; left: 10px; padding: 10px; font-size: 16px;">🏠 Home</button>
+
+    <!-- Logout Button (Top Right) -->
+    <button id="logout-button" style="position: absolute; top: 10px; right: 10px; padding: 10px; font-size: 16px; background-color: red; color: white; border: none;">Logout</button>
+
+    <h1 style="text-align: center;">My Account</h1>
+    <p style="text-align: center;"><strong>Welcome, <span id="user-name">Loading...</span>!</strong></p>
+
+    <h2 style="text-align: center;">My Tickets</h2>
+
+    <!-- Ticket Table -->
+    <div style="display: flex; justify-content: center;">
+        <table border="1" id="tickets-table" style="width: 80%; text-align: center; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Date</th>
+                    <th>Number of Tickets</th>
+                    <th>Total Cost</th>
+                </tr>
+            </thead>
+            <tbody id="tickets-body">
+                <tr><td colspan="4">No tickets purchased yet.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const API_URL = "http://localhost:5001/api";
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            const userSession = JSON.parse(localStorage.getItem("userLoggedIn"));
+    
+            if (!userSession || !userSession.email) {
+                alert("⚠️ You must log in first.");
+                window.location.href = "index.html"; 
+                return;
+            }
+    
+            console.log("🔍 Fetching account data for:", userSession.email);
+    
+            fetch(`${API_URL}/users/my-account`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: userSession.email })  // Debug: Ensuring email is sent
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Account Data:", data);
+    
+                if (data.user) {
+                    document.getElementById("user-name").innerText = data.user.name;
+                }
+    
+                const ticketsBody = document.getElementById("tickets-body");
+                ticketsBody.innerHTML = "";
+    
+                if (data.tickets && data.tickets.length > 0) {
+                    data.tickets.forEach(ticket => {
+                        const formattedDate = new Date(ticket.purchase_date).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit"
+                        });
+    
+                        let row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${ticket.event_name || "Unknown Event"}</td>
+                            <td>${formattedDate}</td>
+                            <td>${ticket.quantity || "0"}</td>
+                            <td>$${(ticket.event_price * ticket.quantity).toFixed(2)}</td>
+                        `;
+                        ticketsBody.appendChild(row);
+                    });
+                } else {
+                    ticketsBody.innerHTML = "<tr><td colspan='4'>No tickets purchased yet.</td></tr>";
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching account info:", error);
+                alert("Error fetching account details.");
+            });
+    
+            document.getElementById("home-button").addEventListener("click", () => {
+                window.location.href = "index.html";
+            });
+    
+            document.getElementById("logout-button").addEventListener("click", () => {
+                localStorage.removeItem("userLoggedIn");
+                alert("User has been Logged out successfully!");
+                window.location.href = "index.html";
+            });
+        });
+    </script>
+        
+
+</body>
+</html>

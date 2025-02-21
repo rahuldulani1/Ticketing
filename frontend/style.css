@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+
+input {
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    width: 200px;
+}
+
+button {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+.home-button {
+    position: absolute;
+    top: 20px; /* Adjust spacing from the top */
+    left: 20px; /* Adjust spacing from the left */
+    font-size: 1.8rem; /* Double the font size */
+    padding: 15px 30px; /* Bigger padding for a larger button */
+    background-color: #007BFF; /* Nice blue color */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
