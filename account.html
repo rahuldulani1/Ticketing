@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Account</title>
+     <!-- Link to CSS file -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,7 +16,7 @@
 
     <!-- Logout Button (Top Right) -->
     <button id="logout-button" style="position: absolute; top: 10px; right: 10px; padding: 10px; font-size: 16px; background-color: red; color: white; border: none;">Logout</button>
-    
+
     <!-- Page Header and welcome message -->
     <h1 style="text-align: center;">My Account</h1>
     <p style="text-align: center;"><strong>Welcome, <span id="user-name">Loading...</span>!</strong></p>
@@ -27,6 +28,7 @@
         <table border="1" id="tickets-table" style="width: 80%; text-align: center; border-collapse: collapse;">
             <thead>
                 <tr>
+                     <!-- Column haeaders for tickets table -->
                     <th>Event Name</th>
                     <th>Date</th>
                     <th>Number of Tickets</th>
@@ -34,6 +36,7 @@
                 </tr>
             </thead>
             <tbody id="tickets-body">
+                 <!-- Default Row: If no tickets purchased yet -->
                 <tr><td colspan="4">No tickets purchased yet.</td></tr>
             </tbody>
         </table>
@@ -78,7 +81,7 @@
                             hour: "2-digit",
                             minute: "2-digit"
                         });
-    
+                        //Setting the inner row of the HTML with ticket details
                         let row = document.createElement("tr");
                         row.innerHTML = `
                             <td>${ticket.event_name || "Unknown Event"}</td>
@@ -86,9 +89,11 @@
                             <td>${ticket.quantity || "0"}</td>
                             <td>$${(ticket.event_price * ticket.quantity).toFixed(2)}</td>
                         `;
+                        //create a new row in the table
                         ticketsBody.appendChild(row);
                     });
                 } else {
+                    //IF user has not purchased any ticekts yet disaply this 
                     ticketsBody.innerHTML = "<tr><td colspan='4'>No tickets purchased yet.</td></tr>";
                 }
             })
