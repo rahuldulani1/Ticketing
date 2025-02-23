@@ -1,0 +1,36 @@
+<!-- Checkout Page-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character encoding-->
+    <meta charset="UTF-8">\
+    <!-- Rendering -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page Title-->
+    <title>Checkout</title>
+    <!-- Link to the CSS file-->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Main Heading-->
+    <h1>Checkout</h1>
+    <!--Display Event name-->
+    <!-- The name of the events is dynamically inserted into the span with id "event-name" -->
+    <p><strong>Event:</strong> <span id="event-name"></span></p>
+    <!-- Character encoding-->
+    <!-- Dynamically inserted into the span with id "ticket-price" -->
+    <p><strong>Price per Ticket:</strong> $<span id="ticket-price"></span></p>
+    <!--User input for number of tickets they want to purchase. Set default value to 1-->
+    <label for="ticket-quantity">Number of Tickets:</label>
+    <input type="number" id="ticket-quantity" min="1" value="1">
+    
+    <!--Display total cost of tickets, calculated and inserted dynamically into span-->
+    <p><strong>Total Cost:</strong> $<span id="total-cost"></span></p>
+    
+    <!--Checkout Button, Clicking on this button will trigger the purchase process -->
+    <button id="checkout-button">Checkout</button>
+
+    <!--Invoke backend route-->
+    <script src="checkout.js"></script>
+</body>
+</html>

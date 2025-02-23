@@ -65,7 +65,7 @@ app.post('/api/users/my-account', (req, res) => {
             [user.id],
             (err, ticketResult) => {
                 
-                
+                //Error Handling: SQL Query Fething Error
                 if (err) {
                     console.error("(Debug:SQL query)Error fetching tickets:", err);
                     return res.status(500).json({ message: "Error retrieving tickets" });
